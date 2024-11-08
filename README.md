@@ -6,8 +6,9 @@ The idea is to give continuity to the project previously generated in Python, bu
 Project Description: In this project we will develop an inventory control software, which allows the user to save and delete products, update prices and record inputs and outputs of products, including sales and returns. In addition, a PDF report and a spreadsheet will be generated to store all inventory data. Likewise, the UML diagram is incorporated at the end of this README.
 ---------------------------------------------------
 
+![Classes diagram drawio (3)](https://github.com/user-attachments/assets/fa406c9c-fdf5-47be-a6ee-e530e1187d56)
 
-![Classes diagram drawio (2)](https://github.com/user-attachments/assets/3ff2c13e-753f-4fb6-aafc-56e0b409a2f9)
+
 
 
 
