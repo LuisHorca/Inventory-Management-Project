@@ -5,17 +5,14 @@
 
 class Product {
 private:
-    int productID;              
-    double price;               
-    int quantity;              
+    std::string productID;
+    std::string name;
+    double price;
+    int quantity;
 
 public:
-    Product(
-        const std::string &id,
-        const std::string &name,
-        double price,
-        int quantity
-    );
+    Product();
+    Product(const std::string& productID, const std::string& name, double price, int quantity);
 
     double getPrice() const;
     int getQuantity() const;
@@ -24,4 +21,5 @@ public:
     void removeStock(int quantity);
 };
 
-#endif 
+#endif
+
