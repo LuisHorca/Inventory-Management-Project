@@ -8,4 +8,5 @@ Project Description: In this project we will develop an inventory control softwa
 
 
 
-![Classes diagram drawio](https://github.com/user-attachments/assets/79e6dd73-b36b-4ca1-8e67-88600123d038)
+![Classes diagram drawio (1)](https://github.com/user-attachments/assets/d4068bb9-407c-431a-a51d-b12aed0604d6)
+
