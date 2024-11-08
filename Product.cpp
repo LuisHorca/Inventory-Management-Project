@@ -2,7 +2,7 @@
 
 Product::Product() 
     : productID("1"), 
-      name("Crema"), 
+      name("Cream"), 
       price(15), 
       quantity(5) {}
 
