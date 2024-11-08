@@ -9,9 +9,9 @@ private:
     std::string contactInfo;
 
 public:
-    Supplier(const std::string &name, const std::string &contactInfo);
-
+    Supplier();
+    Supplier(const std::string& name, const std::string& contactInfo);
     std::string getContactInfo() const;
 };
 
-#endif 
+#endif
