@@ -2,6 +2,7 @@
 #define PRODUCT_H
 
 #include <string>
+#include "Supplier.h"
 
 class Product {
 private:
@@ -9,16 +10,17 @@ private:
     std::string name;
     double price;
     int quantity;
+    Supplier supplier;
 
 public:
-    Product();
-    Product(const std::string& productID, const std::string& name, double price, int quantity);
+    Product(std::string productID, std::string name, double price, int quantity, Supplier supplier);
 
-    double getPrice() const;
-    int getQuantity() const;
+    double getPrice();
+    int getQuantity();
     void setPrice(double newPrice);
     void addStock(int quantity);
     void removeStock(int quantity);
+    Supplier getSupplier();
 };
 
 #endif
