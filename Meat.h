@@ -11,10 +11,10 @@ private:
 
 public:
     Meat();
-    Meat(const std::string& productID, const std::string& name, double price, int quantity, const std::string& cutType, bool isFrozen);
+    Meat(std::string productID, std::string name, double price, int quantity, Supplier supplier, std::string cutType, bool isFrozen);
 
-    std::string getCutType() const;
-    bool getIsFrozen() const;
+    std::string getCutType();
+    bool getIsFrozen();
 };
 
 #endif
