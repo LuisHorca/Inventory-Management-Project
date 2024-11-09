@@ -1,13 +1,9 @@
 #include "Supplier.h"
 
-Supplier::Supplier() 
-    : name("Lala"), 
-      contactInfo("123") {}
+Supplier::Supplier() {}
 
-Supplier::Supplier(const std::string& name, const std::string& contactInfo)
-    : name(name), 
-      contactInfo(contactInfo) {}
+Supplier::Supplier(std::string name, std::string contactInfo) {}
 
-std::string Supplier::getContactInfo() const {
-    return contactInfo;
+std::string Supplier::getContactInfo() {
+    return "";
 }
