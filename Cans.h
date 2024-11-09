@@ -9,9 +9,10 @@ private:
 
 public:
     Cans();
-    Cans(const std::string& productID, const std::string& name, double price, int quantity, double contentVolume);
+    Cans(std::string productID, std::string name, double price, int quantity, Supplier supplier, double contentVolume);
 
-    double getContentVolume() const;
+    double getContentVolume();
 };
 
 #endif
+
