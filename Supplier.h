@@ -10,8 +10,8 @@ private:
 
 public:
     Supplier();
-    Supplier(const std::string& name, const std::string& contactInfo);
-    std::string getContactInfo() const;
+    Supplier(std::string name, std::string contactInfo);
+    std::string getContactInfo();
 };
 
 #endif
