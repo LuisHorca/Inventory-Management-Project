@@ -1,19 +1,13 @@
 #include "Meat.h"
 
-Meat::Meat() 
-    : Product(), 
-      cutType(""), 
-      isFrozen(false) {}
+Meat::Meat() {}
 
-Meat::Meat(const std::string& productID, const std::string& name, double price, int quantity, const std::string& cutType, bool isFrozen)
-    : Product(productID, name, price, quantity), 
-      cutType(cutType), 
-      isFrozen(isFrozen) {}
+Meat::Meat(std::string productID, std::string name, double price, int quantity, Supplier supplier, std::string cutType, bool isFrozen) {}
 
-std::string Meat::getCutType() const {
-    return cutType;
+std::string Meat::getCutType() {
+    return "";
 }
 
-bool Meat::getIsFrozen() const {
-    return isFrozen;
+bool Meat::getIsFrozen() {
+    return false;
 }
