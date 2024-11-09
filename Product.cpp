@@ -1,35 +1,22 @@
 #include "Product.h"
 
-Product::Product() 
-    : productID("1"), 
-      name("Cream"), 
-      price(15), 
-      quantity(5) {}
+Product::Product(std::string productID, std::string name, double price, int quantity, Supplier supplier) {}
 
-Product::Product(const std::string& productID, const std::string& name, double price, int quantity)
-    : productID(productID), 
-      name(name), 
-      price(price), 
-      quantity(quantity) {}
-
-double Product::getPrice() const {
-    return price;
+double Product::getPrice() {
+    return 0.0;
 }
 
-int Product::getQuantity() const {
-    return quantity;
+int Product::getQuantity() {
+    return 0;
 }
 
-void Product::setPrice(double newPrice) {
-    price = newPrice;
+void Product::setPrice(double newPrice) {}
+
+void Product::addStock(int qty) {}
+
+void Product::removeStock(int qty) {}
+
+Supplier Product::getSupplier() {
+    return Supplier();
 }
 
-void Product::addStock(int qty) {
-    quantity += qty;
-}
-
-void Product::removeStock(int qty) {
-    if (quantity >= qty) {
-        quantity -= qty;
-    }
-}
