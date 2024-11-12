@@ -16,5 +16,5 @@ public:
     bool getIsFrozen() const;
 };
 
-#endif // MEAT_H
+#endif 
 
