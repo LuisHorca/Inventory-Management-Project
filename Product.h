@@ -5,7 +5,7 @@
 #include "Supplier.h"
 
 class Product {
-private:
+protected:
     std::string productID;
     std::string name;
     double price;
@@ -13,15 +13,16 @@ private:
     Supplier supplier;
 
 public:
-    Product(std::string productID, std::string name, double price, int quantity, Supplier supplier);
+    Product(const std::string &productID, const std::string &name, double price, int quantity, const Supplier &supplier);
 
-    double getPrice();
-    int getQuantity();
+    double getPrice() const;
+    int getQuantity() const;
     void setPrice(double newPrice);
     void addStock(int quantity);
     void removeStock(int quantity);
-    Supplier getSupplier();
+    Supplier getSupplier() const;
 };
 
-#endif
+#endif // PRODUCT_H
+
 
