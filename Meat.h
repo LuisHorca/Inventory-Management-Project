@@ -10,11 +10,11 @@ private:
     bool isFrozen;
 
 public:
-    Meat();
-    Meat(std::string productID, std::string name, double price, int quantity, Supplier supplier, std::string cutType, bool isFrozen);
+    Meat(const std::string &productID, const std::string &name, double price, int quantity, const Supplier &supplier, const std::string &cutType, bool isFrozen);
 
-    std::string getCutType();
-    bool getIsFrozen();
+    std::string getCutType() const;
+    bool getIsFrozen() const;
 };
 
-#endif
+#endif // MEAT_H
+
