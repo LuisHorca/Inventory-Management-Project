@@ -1,13 +1,12 @@
 #include "Dairy.h"
 
-Dairy::Dairy() {}
+Dairy::Dairy(const std::string &productID, const std::string &name, double price, int quantity, const Supplier &supplier, bool isRefrigerated, double volume)
+    : Product(productID, name, price, quantity, supplier), isRefrigerated(isRefrigerated), volume(volume) {}
 
-Dairy::Dairy(std::string productID, std::string name, double price, int quantity, Supplier supplier, bool isRefrigerated, double volume) {}
-
-double Dairy::getVolume() {
-    return 0.0;
+double Dairy::getVolume() const {
+    return volume;
 }
 
-bool Dairy::getIsRefrigerated() {
-    return false;
+bool Dairy::getIsRefrigerated() const {
+    return isRefrigerated;
 }
