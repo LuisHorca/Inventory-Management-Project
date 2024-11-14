@@ -9,12 +9,10 @@ private:
     double volume;
 
 public:
-    Dairy();
-    Dairy(std::string productID, std::string name, double price, int quantity, Supplier supplier, bool isRefrigerated, double volume);
+    Dairy(const std::string &productID, const std::string &name, double price, int quantity, const Supplier &supplier, bool isRefrigerated, double volume);
 
-    double getVolume();
-    bool getIsRefrigerated();
+    double getVolume() const;
+    bool getIsRefrigerated() const;
 };
 
-#endif
-
+#endif 
