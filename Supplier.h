@@ -19,4 +19,4 @@ public:
     void setContactInfo(std::string contactInfo);
 };
 
-#endif // SUPPLIER_H
+#endif 
