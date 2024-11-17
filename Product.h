@@ -13,16 +13,29 @@ protected:
     Supplier supplier;
 
 public:
-    Product(const std::string &productID, const std::string &name, double price, int quantity, const Supplier &supplier);
+    Product(std::string productID, std::string name, double price, int quantity, Supplier supplier);
+    Product();
+
+    std::string getProductID() const;
+    void setProductID(std::string productID);
+
+    std::string getName() const;
+    void setName(std::string name);
 
     double getPrice() const;
+    void setPrice(double price);
+
     int getQuantity() const;
-    void setPrice(double newPrice);
+    void setQuantity(int quantity);
+
+    Supplier getSupplier() const;
+    void setSupplier(Supplier supplier);
+
     void addStock(int quantity);
     void removeStock(int quantity);
-    Supplier getSupplier() const;
 };
 
 #endif // PRODUCT_H
+
 
 
