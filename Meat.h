@@ -2,7 +2,6 @@
 #define MEAT_H
 
 #include "Product.h"
-#include <string>
 
 class Meat : public Product {
 private:
@@ -10,10 +9,13 @@ private:
     bool isFrozen;
 
 public:
-    Meat(const std::string &productID, const std::string &name, double price, int quantity, const Supplier &supplier, const std::string &cutType, bool isFrozen);
+    Meat(std::string productID, std::string name, double price, int quantity, Supplier supplier, std::string cutType, bool isFrozen);
 
     std::string getCutType() const;
+    void setCutType(std::string cutType);
+
     bool getIsFrozen() const;
+    void setIsFrozen(bool isFrozen);
 };
 
 #endif 
