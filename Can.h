@@ -8,11 +8,12 @@ private:
     double contentVolume;
 
 public:
-    Can(const std::string &productID, const std::string &name, double price, int quantity, const Supplier &supplier, double contentVolume);
+    Can(std::string productID, std::string name, double price, int quantity, Supplier supplier, double contentVolume);
 
     double getContentVolume() const;
+    void setContentVolume(double contentVolume);
 };
 
-#endif // CAN_H
+#endif 
 
 
