@@ -21,8 +21,9 @@ This subclass focuses on dairy products, which usually have special storage requ
 Meat:
 This subclass represents meat products, which also require special handling due to their perishable nature. Distinguishing attributes of this class include the type of meat cut and whether the product is frozen. The inclusion of this subclass makes it possible to record relevant information for meat products and to guarantee their proper handling in terms of storage and traceability.
 ---------------------------------------------------
+![Classes diagram drawio (6)](https://github.com/user-attachments/assets/06a299f6-00ef-4ad6-8598-939e714cb7ce)
 
-![Classes diagram drawio (5)](https://github.com/user-attachments/assets/0a8b27b7-b1fd-4d66-aa5a-e766f058c755)
+
 
 
 
