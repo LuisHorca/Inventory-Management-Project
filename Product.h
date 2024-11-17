@@ -35,7 +35,7 @@ public:
     void removeStock(int quantity);
 };
 
-#endif // PRODUCT_H
+#endif 
 
 
 
