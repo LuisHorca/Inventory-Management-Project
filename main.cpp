@@ -29,7 +29,7 @@ void showMenu() {
 
 // Adds a canned product to the inventory.
 void addCannedProduct() {
-    std::string id, name;
+    std::string id, name, supplierName, supplierContact;
     double price, volume;
     int quantity;
 
@@ -44,14 +44,19 @@ void addCannedProduct() {
     std::cin >> quantity;
     std::cout << "Enter volume (liters): ";
     std::cin >> volume;
+    std::cin.ignore(); // Clear input buffer
+    std::cout << "Enter supplier name: ";
+    std::getline(std::cin, supplierName);
+    std::cout << "Enter supplier contact: ";
+    std::getline(std::cin, supplierContact);
 
-    inventory[productCount++] = new Can(id, name, price, quantity, Supplier("Default Supplier", "Contact Info"), volume);
+    inventory[productCount++] = new Can(id, name, price, quantity, Supplier(supplierName, supplierContact), volume);
     std::cout << "Canned product added.\n";
 }
 
 // Adds a dairy product to the inventory.
 void addDairyProduct() {
-    std::string id, name;
+    std::string id, name, supplierName, supplierContact;
     double price, volume;
     int quantity;
     bool refrigerated;
@@ -69,14 +74,19 @@ void addDairyProduct() {
     std::cin >> refrigerated;
     std::cout << "Enter volume (liters): ";
     std::cin >> volume;
+    std::cin.ignore(); // Clear input buffer
+    std::cout << "Enter supplier name: ";
+    std::getline(std::cin, supplierName);
+    std::cout << "Enter supplier contact: ";
+    std::getline(std::cin, supplierContact);
 
-    inventory[productCount++] = new Dairy(id, name, price, quantity, Supplier("Default Supplier", "Contact Info"), refrigerated, volume);
+    inventory[productCount++] = new Dairy(id, name, price, quantity, Supplier(supplierName, supplierContact), refrigerated, volume);
     std::cout << "Dairy product added.\n";
 }
 
 // Adds a meat product to the inventory.
 void addMeatProduct() {
-    std::string id, name, cutType;
+    std::string id, name, cutType, supplierName, supplierContact;
     double price;
     int quantity;
     bool frozen;
@@ -90,60 +100,39 @@ void addMeatProduct() {
     std::cin >> price;
     std::cout << "Enter quantity: ";
     std::cin >> quantity;
-    std::cin.ignore();
+    std::cin.ignore(); // Clear input buffer
     std::cout << "Enter cut type: ";
     std::getline(std::cin, cutType);
     std::cout << "Is it frozen? (1 = Yes, 0 = No): ";
     std::cin >> frozen;
+    std::cin.ignore(); // Clear input buffer
+    std::cout << "Enter supplier name: ";
+    std::getline(std::cin, supplierName);
+    std::cout << "Enter supplier contact: ";
+    std::getline(std::cin, supplierContact);
 
-    inventory[productCount++] = new Meat(id, name, price, quantity, Supplier("Default Supplier", "Contact Info"), cutType, frozen);
+    inventory[productCount++] = new Meat(id, name, price, quantity, Supplier(supplierName, supplierContact), cutType, frozen);
     std::cout << "Meat product added.\n";
 }
 
-// Displays all products in the inventory.
+// Displays all products in the inventory, including supplier details.
 void showInventory() {
     if (productCount == 0) {
         std::cout << "The inventory is empty.\n";
     } else {
         for (int i = 0; i < productCount; i++) {
-            std::cout << "Product " << i + 1 << ": " << inventory[i]->getName()
-                      << " (ID: " << inventory[i]->getProductID()
-                      << ", Price: $" << inventory[i]->getPrice()
-                      << ", Quantity: " << inventory[i]->getQuantity() << ")\n";
+            Supplier supplier = inventory[i]->getSupplier();
+            std::cout << "Product " << i + 1 << ":\n";
+            std::cout << "  Name: " << inventory[i]->getName() << "\n";
+            std::cout << "  ID: " << inventory[i]->getProductID() << "\n";
+            std::cout << "  Price: $" << inventory[i]->getPrice() << "\n";
+            std::cout << "  Quantity: " << inventory[i]->getQuantity() << "\n";
+            std::cout << "  Supplier: " << supplier.getName() << " (Contact: " << supplier.getContactInfo() << ")\n";
         }
     }
 }
 
-// Updates product details in the inventory.
-void updateProductDetails() {
-    std::string id, newName;
-    double newPrice;
-    int newQuantity;
-
-    std::cin.ignore();
-    std::cout << "Enter the product ID to update: ";
-    std::getline(std::cin, id);
-
-    for (int i = 0; i < productCount; i++) {
-        if (inventory[i]->getProductID() == id) {
-            std::cout << "Enter new name: ";
-            std::getline(std::cin, newName);
-            std::cout << "Enter new price: ";
-            std::cin >> newPrice;
-            std::cout << "Enter new quantity: ";
-            std::cin >> newQuantity;
-
-            inventory[i]->setName(newName);
-            inventory[i]->setPrice(newPrice);
-            inventory[i]->setQuantity(newQuantity);
-            std::cout << "Product details updated.\n";
-            return;
-        }
-    }
-    std::cout << "Product with ID " << id << " not found.\n";
-}
-
-// Displays the details of the supplier for a specific product.
+// Shows the supplier details for a specific product.
 void showSupplierDetails() {
     std::string id;
     std::cin.ignore();
@@ -152,7 +141,7 @@ void showSupplierDetails() {
 
     for (int i = 0; i < productCount; i++) {
         if (inventory[i]->getProductID() == id) {
-            Supplier supplier = inventory[i]->getSupplier(); // Gets a copy of the supplier.
+            Supplier supplier = inventory[i]->getSupplier();
             std::cout << "Supplier Name: " << supplier.getName() << "\n";
             std::cout << "Supplier Contact: " << supplier.getContactInfo() << "\n";
             return;
@@ -163,23 +152,21 @@ void showSupplierDetails() {
 
 // Updates the supplier details for a specific product.
 void updateSupplierDetails() {
-    std::string id, newName, newContactInfo;
+    std::string id, newSupplierName, newSupplierContact;
     std::cin.ignore();
     std::cout << "Enter the product ID to update supplier details: ";
     std::getline(std::cin, id);
 
     for (int i = 0; i < productCount; i++) {
         if (inventory[i]->getProductID() == id) {
-            Supplier supplier = inventory[i]->getSupplier(); // Gets a copy of the supplier.
             std::cout << "Enter new supplier name: ";
-            std::getline(std::cin, newName);
+            std::getline(std::cin, newSupplierName);
             std::cout << "Enter new supplier contact: ";
-            std::getline(std::cin, newContactInfo);
+            std::getline(std::cin, newSupplierContact);
 
-            supplier.setName(newName);
-            supplier.setContactInfo(newContactInfo);
-            inventory[i]->setSupplier(supplier); // Updates the supplier in the product.
-            std::cout << "Supplier details updated.\n";
+            Supplier updatedSupplier(newSupplierName, newSupplierContact);
+            inventory[i]->setSupplier(updatedSupplier);
+            std::cout << "Supplier details updated successfully.\n";
             return;
         }
     }
