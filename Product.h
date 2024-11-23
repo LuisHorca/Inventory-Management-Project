@@ -4,42 +4,43 @@
 #include <string>
 #include "Supplier.h"
 
-// Class Product: Base class for all products in the inventory.
 class Product {
 protected:
-    std::string productID;  // Unique identifier for the product.
-    std::string name;       // Product name.
-    double price;           // Product price.
-    int quantity;           // Quantity in stock.
-    Supplier supplier;      // Supplier of the product.
+    std::string productID;
+    std::string name;
+    double price;
+    int quantity;
+    Supplier supplier;
 
 public:
-    // Constructors to initialize a product.
-    Product(std::string productID, std::string name, double price, int quantity, Supplier supplier);
-    Product(); // Default constructor.
+    // Constructors
+    Product();
+    Product(const std::string& productID, const std::string& name, double price, int quantity, const Supplier& supplier);
 
-    // Getters and setters for product attributes.
-    std::string getProductID() const; // Returns the product ID.
-    void setProductID(std::string productID); // Sets the product ID.
+    // Getters
+    std::string getProductID() const;
+    std::string getName() const;
+    double getPrice() const;
+    int getQuantity() const;
+    Supplier getSupplier() const; // Returns a copy of the supplier
 
-    std::string getName() const; // Returns the product name.
-    void setName(std::string name); // Sets the product name.
+    // Setters
+    void setProductID(const std::string& productID);
+    void setName(const std::string& name);
+    void setPrice(double price);
+    void setQuantity(int quantity);
+    void setSupplier(const Supplier& supplier); // Updates the supplier
 
-    double getPrice() const; // Returns the product price.
-    void setPrice(double price); // Sets the product price.
+    // Inventory management
+    void addStock(int amount);
+    void removeStock(int amount);
 
-    int getQuantity() const; // Returns the product quantity.
-    void setQuantity(int quantity); // Sets the product quantity.
-
-    Supplier getSupplier() const; // Returns the product's supplier.
-    void setSupplier(Supplier supplier); // Sets the product's supplier.
-
-    // Methods to manage stock.
-    void addStock(int quantity); // Increases product quantity.
-    void removeStock(int quantity); // Decreases product quantity.
+    // Virtual destructor for polymorphism
+    virtual ~Product() {}
 };
 
-#endif
+#endif // PRODUCT_H
+
 
 
 
