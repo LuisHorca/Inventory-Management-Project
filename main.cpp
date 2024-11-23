@@ -7,9 +7,9 @@
 #include "Meat.h"
 
 // Constants and global variables for inventory management.
-const int MAX_PRODUCTS = 100; // Maximum number of products allowed in the inventory.
-Product* inventory[MAX_PRODUCTS]; // Array to store pointers to Product objects.
-int productCount = 0; // Counter to track the number of products in the inventory.
+const int MAX_PRODUCTS = 100;
+Product* inventory[MAX_PRODUCTS];
+int productCount = 0;
 
 // Displays the main menu options.
 void showMenu() {
@@ -44,7 +44,7 @@ void addCannedProduct() {
     std::cin >> quantity;
     std::cout << "Enter volume (liters): ";
     std::cin >> volume;
-    std::cin.ignore(); // Clear input buffer
+    std::cin.ignore();
     std::cout << "Enter supplier name: ";
     std::getline(std::cin, supplierName);
     std::cout << "Enter supplier contact: ";
@@ -74,7 +74,7 @@ void addDairyProduct() {
     std::cin >> refrigerated;
     std::cout << "Enter volume (liters): ";
     std::cin >> volume;
-    std::cin.ignore(); // Clear input buffer
+    std::cin.ignore();
     std::cout << "Enter supplier name: ";
     std::getline(std::cin, supplierName);
     std::cout << "Enter supplier contact: ";
@@ -100,12 +100,12 @@ void addMeatProduct() {
     std::cin >> price;
     std::cout << "Enter quantity: ";
     std::cin >> quantity;
-    std::cin.ignore(); // Clear input buffer
+    std::cin.ignore();
     std::cout << "Enter cut type: ";
     std::getline(std::cin, cutType);
     std::cout << "Is it frozen? (1 = Yes, 0 = No): ";
     std::cin >> frozen;
-    std::cin.ignore(); // Clear input buffer
+    std::cin.ignore();
     std::cout << "Enter supplier name: ";
     std::getline(std::cin, supplierName);
     std::cout << "Enter supplier contact: ";
@@ -115,7 +115,7 @@ void addMeatProduct() {
     std::cout << "Meat product added.\n";
 }
 
-// Displays all products in the inventory, including supplier details.
+// Displays all products in the inventory.
 void showInventory() {
     if (productCount == 0) {
         std::cout << "The inventory is empty.\n";
@@ -132,9 +132,39 @@ void showInventory() {
     }
 }
 
+// Updates product details in the inventory.
+void updateProductDetails() {
+    std::string id, newName;
+    double newPrice;
+    int newQuantity;
+
+    std::cin.ignore();
+    std::cout << "Enter the product ID to update: ";
+    std::getline(std::cin, id);
+
+    for (int i = 0; i < productCount; i++) {
+        if (inventory[i]->getProductID() == id) {
+            std::cout << "Enter new name: ";
+            std::getline(std::cin, newName);
+            std::cout << "Enter new price: ";
+            std::cin >> newPrice;
+            std::cout << "Enter new quantity: ";
+            std::cin >> newQuantity;
+
+            inventory[i]->setName(newName);
+            inventory[i]->setPrice(newPrice);
+            inventory[i]->setQuantity(newQuantity);
+            std::cout << "Product details updated successfully.\n";
+            return;
+        }
+    }
+    std::cout << "Product with ID " << id << " not found.\n";
+}
+
 // Shows the supplier details for a specific product.
 void showSupplierDetails() {
     std::string id;
+
     std::cin.ignore();
     std::cout << "Enter the product ID to view supplier details: ";
     std::getline(std::cin, id);
@@ -153,6 +183,7 @@ void showSupplierDetails() {
 // Updates the supplier details for a specific product.
 void updateSupplierDetails() {
     std::string id, newSupplierName, newSupplierContact;
+
     std::cin.ignore();
     std::cout << "Enter the product ID to update supplier details: ";
     std::getline(std::cin, id);
@@ -254,4 +285,5 @@ int main() {
 
     return 0;
 }
+
 
