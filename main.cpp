@@ -21,8 +21,126 @@ void showMenu() {
     std::cout << "5. Update product details\n";
     std::cout << "6. Show supplier details\n";
     std::cout << "7. Update supplier details\n";
-    std::cout << "8. Exit\n";
+    std::cout << "8. Add stock to a product\n";
+    std::cout << "9. Remove stock from a product\n";
+    std::cout << "10. Exit\n";
     std::cout << "Select an option: ";
+}
+
+// Adds a canned product to the inventory.
+void addCannedProduct() {
+    std::string id, name;
+    double price, volume;
+    int quantity;
+
+    std::cin.ignore();
+    std::cout << "Enter product ID: ";
+    std::getline(std::cin, id);
+    std::cout << "Enter name: ";
+    std::getline(std::cin, name);
+    std::cout << "Enter price: ";
+    std::cin >> price;
+    std::cout << "Enter quantity: ";
+    std::cin >> quantity;
+    std::cout << "Enter volume (liters): ";
+    std::cin >> volume;
+
+    inventory[productCount++] = new Can(id, name, price, quantity, Supplier("Default Supplier", "Contact Info"), volume);
+    std::cout << "Canned product added.\n";
+}
+
+// Adds a dairy product to the inventory.
+void addDairyProduct() {
+    std::string id, name;
+    double price, volume;
+    int quantity;
+    bool refrigerated;
+
+    std::cin.ignore();
+    std::cout << "Enter product ID: ";
+    std::getline(std::cin, id);
+    std::cout << "Enter name: ";
+    std::getline(std::cin, name);
+    std::cout << "Enter price: ";
+    std::cin >> price;
+    std::cout << "Enter quantity: ";
+    std::cin >> quantity;
+    std::cout << "Is it refrigerated? (1 = Yes, 0 = No): ";
+    std::cin >> refrigerated;
+    std::cout << "Enter volume (liters): ";
+    std::cin >> volume;
+
+    inventory[productCount++] = new Dairy(id, name, price, quantity, Supplier("Default Supplier", "Contact Info"), refrigerated, volume);
+    std::cout << "Dairy product added.\n";
+}
+
+// Adds a meat product to the inventory.
+void addMeatProduct() {
+    std::string id, name, cutType;
+    double price;
+    int quantity;
+    bool frozen;
+
+    std::cin.ignore();
+    std::cout << "Enter product ID: ";
+    std::getline(std::cin, id);
+    std::cout << "Enter name: ";
+    std::getline(std::cin, name);
+    std::cout << "Enter price: ";
+    std::cin >> price;
+    std::cout << "Enter quantity: ";
+    std::cin >> quantity;
+    std::cin.ignore();
+    std::cout << "Enter cut type: ";
+    std::getline(std::cin, cutType);
+    std::cout << "Is it frozen? (1 = Yes, 0 = No): ";
+    std::cin >> frozen;
+
+    inventory[productCount++] = new Meat(id, name, price, quantity, Supplier("Default Supplier", "Contact Info"), cutType, frozen);
+    std::cout << "Meat product added.\n";
+}
+
+// Displays all products in the inventory.
+void showInventory() {
+    if (productCount == 0) {
+        std::cout << "The inventory is empty.\n";
+    } else {
+        for (int i = 0; i < productCount; i++) {
+            std::cout << "Product " << i + 1 << ": " << inventory[i]->getName()
+                      << " (ID: " << inventory[i]->getProductID()
+                      << ", Price: $" << inventory[i]->getPrice()
+                      << ", Quantity: " << inventory[i]->getQuantity() << ")\n";
+        }
+    }
+}
+
+// Updates product details in the inventory.
+void updateProductDetails() {
+    std::string id, newName;
+    double newPrice;
+    int newQuantity;
+
+    std::cin.ignore();
+    std::cout << "Enter the product ID to update: ";
+    std::getline(std::cin, id);
+
+    for (int i = 0; i < productCount; i++) {
+        if (inventory[i]->getProductID() == id) {
+            std::cout << "Enter new name: ";
+            std::getline(std::cin, newName);
+            std::cout << "Enter new price: ";
+            std::cin >> newPrice;
+            std::cout << "Enter new quantity: ";
+            std::cin >> newQuantity;
+
+            inventory[i]->setName(newName);
+            inventory[i]->setPrice(newPrice);
+            inventory[i]->setQuantity(newQuantity);
+            std::cout << "Product details updated.\n";
+            return;
+        }
+    }
+    std::cout << "Product with ID " << id << " not found.\n";
 }
 
 // Displays the details of the supplier for a specific product.
@@ -68,28 +186,74 @@ void updateSupplierDetails() {
     std::cout << "Product with ID " << id << " not found.\n";
 }
 
+// Adds stock to a product in the inventory.
+void addStockToProduct() {
+    std::string id;
+    int amount;
+
+    std::cin.ignore();
+    std::cout << "Enter the product ID to add stock: ";
+    std::getline(std::cin, id);
+    std::cout << "Enter the amount to add: ";
+    std::cin >> amount;
+
+    for (int i = 0; i < productCount; i++) {
+        if (inventory[i]->getProductID() == id) {
+            inventory[i]->addStock(amount);
+            std::cout << "Stock added successfully.\n";
+            return;
+        }
+    }
+    std::cout << "Product with ID " << id << " not found.\n";
+}
+
+// Removes stock from a product in the inventory.
+void removeStockFromProduct() {
+    std::string id;
+    int amount;
+
+    std::cin.ignore();
+    std::cout << "Enter the product ID to remove stock: ";
+    std::getline(std::cin, id);
+    std::cout << "Enter the amount to remove: ";
+    std::cin >> amount;
+
+    for (int i = 0; i < productCount; i++) {
+        if (inventory[i]->getProductID() == id) {
+            inventory[i]->removeStock(amount);
+            std::cout << "Stock removed successfully.\n";
+            return;
+        }
+    }
+    std::cout << "Product with ID " << id << " not found.\n";
+}
+
 int main() {
     int option = 0;
 
-    while (option != 8) {
+    while (option != 10) {
         showMenu();
         std::cin >> option;
 
         if (option == 1) {
-            // Function to add a canned product.
+            addCannedProduct();
         } else if (option == 2) {
-            // Function to add a dairy product.
+            addDairyProduct();
         } else if (option == 3) {
-            // Function to add a meat product.
+            addMeatProduct();
         } else if (option == 4) {
-            // Function to show all products.
+            showInventory();
         } else if (option == 5) {
-            // Function to update product details.
+            updateProductDetails();
         } else if (option == 6) {
             showSupplierDetails();
         } else if (option == 7) {
             updateSupplierDetails();
         } else if (option == 8) {
+            addStockToProduct();
+        } else if (option == 9) {
+            removeStockFromProduct();
+        } else if (option == 10) {
             std::cout << "Exiting program...\n";
         } else {
             std::cout << "Invalid option. Try again.\n";
@@ -103,5 +267,4 @@ int main() {
 
     return 0;
 }
-
 
