@@ -1,64 +1,72 @@
 #include "Product.h"
 
-// Constructor: Initializes a product with specified attributes.
-Product::Product(std::string productID, std::string name, double price, int quantity, Supplier supplier)
+// Default constructor initializes all attributes to default values.
+Product::Product() : productID(""), name(""), price(0.0), quantity(0), supplier(Supplier()) {}
+
+// Parameterized constructor initializes all attributes with provided values.
+Product::Product(const std::string& productID, const std::string& name, double price, int quantity, const Supplier& supplier)
     : productID(productID), name(name), price(price), quantity(quantity), supplier(supplier) {}
 
-// Default constructor: Initializes an empty product.
-Product::Product()
-    : productID(""), name(""), price(0.0), quantity(0), supplier(Supplier()) {}
-
-// --- Getters and Setters ---
-
-// Get and set the product ID.
+// Returns the product ID.
 std::string Product::getProductID() const {
     return productID;
 }
-void Product::setProductID(std::string productID) {
-    this->productID = productID;
-}
 
-// Get and set the product name.
+// Returns the name of the product.
 std::string Product::getName() const {
     return name;
 }
-void Product::setName(std::string name) {
-    this->name = name;
-}
 
-// Get and set the product price.
+// Returns the price of the product.
 double Product::getPrice() const {
     return price;
 }
+
+// Returns the quantity of the product in stock.
+int Product::getQuantity() const {
+    return quantity;
+}
+
+// Returns a copy of the supplier associated with the product.
+Supplier Product::getSupplier() const {
+    return supplier;
+}
+
+// Sets the product ID to the provided value.
+void Product::setProductID(const std::string& productID) {
+    this->productID = productID;
+}
+
+// Sets the name of the product to the provided value.
+void Product::setName(const std::string& name) {
+    this->name = name;
+}
+
+// Sets the price of the product to the provided value.
 void Product::setPrice(double price) {
     this->price = price;
 }
 
-// Get and set the product quantity.
-int Product::getQuantity() const {
-    return quantity;
-}
+// Sets the quantity of the product to the provided value.
 void Product::setQuantity(int quantity) {
     this->quantity = quantity;
 }
 
-// Get and set the product supplier.
-Supplier Product::getSupplier() const {
-    return supplier;
-}
-void Product::setSupplier(Supplier supplier) {
+// Updates the supplier of the product with the provided supplier object.
+void Product::setSupplier(const Supplier& supplier) {
     this->supplier = supplier;
 }
 
-// --- Stock Management ---
-
-// Adds stock to the product.
-void Product::addStock(int quantity) {
-    this->quantity += quantity;
+// Adds the specified amount to the product stock.
+void Product::addStock(int amount) {
+    quantity += amount;
 }
 
-// Removes stock from the product.
-void Product::removeStock(int quantity) {
-    this->quantity -= quantity;
+// Removes the specified amount from the product stock. Prevents negative stock values.
+void Product::removeStock(int amount) {
+    if (amount <= quantity) {
+        quantity -= amount;
+    } else {
+        quantity = 0;
+    }
 }
-
