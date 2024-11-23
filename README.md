@@ -39,6 +39,38 @@ The goal of this project is to develop inventory control software using OOP in C
 - Enhances efficiency in inventory tracking and supplier management.
 - Supports small and medium-sized businesses by minimizing untracked losses and optimizing operations.
 
+## How to Use the Program
+
+### 1. Download the Project Files
+- Clone or download the repository containing all the project files.
+- Ensure the following files are in the same folder: 
+  - `main.cpp`
+  - `Supplier.h` and `Supplier.cpp`
+  - `Product.h` and `Product.cpp`
+  - `Can.h` and `Can.cpp`
+  - `Dairy.h` and `Dairy.cpp`
+  - `Meat.h` and `Meat.cpp`
+
+### 2. Set Up Your Environment
+- Use an **IDE** (e.g., Visual Studio Code, CLion, or Code::Blocks) or a terminal with a configured **C++ compiler** (e.g., `g++` from MinGW or GCC).
+- Verify that the compiler is installed and added to your system's PATH. If using `g++`, test it with:
+  ```cmd
+  g++ --version
+  cd path\to\project
+  g++ -o inventory_management main.cpp Supplier.cpp Product.cpp Can.cpp Dairy.cpp Meat.cpp
+  inventory_management
+### 3. Interact with the Program
+
+Once running, the program will display a menu with options for managing the inventory:
+
+1. **Add products** (canned, dairy, or meat).
+2. **View the entire inventory**.
+3. **Search for a product by ID**.
+4. **Exit the program**.
+
+Use the menu options by entering the corresponding number and following the prompts.
+
+
 
 ![Classes diagram drawio (6)](https://github.com/user-attachments/assets/06a299f6-00ef-4ad6-8598-939e714cb7ce)
 
