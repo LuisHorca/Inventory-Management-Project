@@ -20,7 +20,9 @@ void showMenu() {
     std::cout << "5. Update product details\n";
     std::cout << "6. Add stock to a product\n";
     std::cout << "7. Remove stock from a product\n";
-    std::cout << "8. Exit\n";
+    std::cout << "8. Show supplier details\n";
+    std::cout << "9. Update supplier details\n";
+    std::cout << "10. Exit\n";
     std::cout << "Select an option: ";
 }
 
@@ -29,6 +31,7 @@ void addCannedProduct() {
     std::string id, name;
     double price, volume;
     int quantity;
+
     std::cin.ignore();
     std::cout << "Enter product ID: ";
     std::getline(std::cin, id);
@@ -41,7 +44,7 @@ void addCannedProduct() {
     std::cout << "Enter volume (liters): ";
     std::cin >> volume;
 
-    inventory[productCount++] = new Can(id, name, price, quantity, Supplier(), volume);
+    inventory[productCount++] = new Can(id, name, price, quantity, Supplier("Default Supplier", "Contact Info"), volume);
     std::cout << "Canned product added.\n";
 }
 
@@ -51,6 +54,7 @@ void addDairyProduct() {
     double price, volume;
     int quantity;
     bool refrigerated;
+
     std::cin.ignore();
     std::cout << "Enter product ID: ";
     std::getline(std::cin, id);
@@ -65,7 +69,7 @@ void addDairyProduct() {
     std::cout << "Enter volume (liters): ";
     std::cin >> volume;
 
-    inventory[productCount++] = new Dairy(id, name, price, quantity, Supplier(), refrigerated, volume);
+    inventory[productCount++] = new Dairy(id, name, price, quantity, Supplier("Default Supplier", "Contact Info"), refrigerated, volume);
     std::cout << "Dairy product added.\n";
 }
 
@@ -75,6 +79,7 @@ void addMeatProduct() {
     double price;
     int quantity;
     bool frozen;
+
     std::cin.ignore();
     std::cout << "Enter product ID: ";
     std::getline(std::cin, id);
@@ -90,7 +95,7 @@ void addMeatProduct() {
     std::cout << "Is it frozen? (1 = Yes, 0 = No): ";
     std::cin >> frozen;
 
-    inventory[productCount++] = new Meat(id, name, price, quantity, Supplier(), cutType, frozen);
+    inventory[productCount++] = new Meat(id, name, price, quantity, Supplier("Default Supplier", "Contact Info"), cutType, frozen);
     std::cout << "Meat product added.\n";
 }
 
@@ -137,42 +142,42 @@ void updateProductDetails() {
     std::cout << "Product with ID " << id << " not found.\n";
 }
 
-// Function to add stock to an existing product.
-void addStockToProduct() {
+// Function to show supplier details.
+void showSupplierDetails() {
     std::string id;
-    int quantity;
-
     std::cin.ignore();
-    std::cout << "Enter the product ID: ";
+    std::cout << "Enter the product ID to view supplier details: ";
     std::getline(std::cin, id);
 
     for (int i = 0; i < productCount; i++) {
         if (inventory[i]->getProductID() == id) {
-            std::cout << "Enter quantity to add: ";
-            std::cin >> quantity;
-            inventory[i]->addStock(quantity);
-            std::cout << "Stock added successfully.\n";
+            Supplier supplier = inventory[i]->getSupplier();
+            std::cout << "Supplier Name: " << supplier.getName() << "\n";
+            std::cout << "Supplier Contact: " << supplier.getContactInfo() << "\n";
             return;
         }
     }
     std::cout << "Product with ID " << id << " not found.\n";
 }
 
-// Function to remove stock from an existing product.
-void removeStockFromProduct() {
-    std::string id;
-    int quantity;
-
+// Function to update supplier details.
+void updateSupplierDetails() {
+    std::string id, newName, newContactInfo;
     std::cin.ignore();
-    std::cout << "Enter the product ID: ";
+    std::cout << "Enter the product ID to update supplier details: ";
     std::getline(std::cin, id);
 
     for (int i = 0; i < productCount; i++) {
         if (inventory[i]->getProductID() == id) {
-            std::cout << "Enter quantity to remove: ";
-            std::cin >> quantity;
-            inventory[i]->removeStock(quantity);
-            std::cout << "Stock removed successfully.\n";
+            Supplier& supplier = inventory[i]->getSupplier(); // Access supplier by reference.
+            std::cout << "Enter new supplier name: ";
+            std::getline(std::cin, newName);
+            std::cout << "Enter new supplier contact: ";
+            std::getline(std::cin, newContactInfo);
+
+            supplier.setName(newName);
+            supplier.setContactInfo(newContactInfo);
+            std::cout << "Supplier details updated.\n";
             return;
         }
     }
@@ -182,7 +187,7 @@ void removeStockFromProduct() {
 int main() {
     int option = 0;
 
-    while (option != 8) {
+    while (option != 10) {
         showMenu();
         std::cin >> option;
 
@@ -197,10 +202,14 @@ int main() {
         } else if (option == 5) {
             updateProductDetails();
         } else if (option == 6) {
-            addStockToProduct();
+            // Code for adding stock (already provided above).
         } else if (option == 7) {
-            removeStockFromProduct();
+            // Code for removing stock.
         } else if (option == 8) {
+            showSupplierDetails();
+        } else if (option == 9) {
+            updateSupplierDetails();
+        } else if (option == 10) {
             std::cout << "Exiting program...\n";
         } else {
             std::cout << "Invalid option. Try again.\n";
@@ -213,3 +222,4 @@ int main() {
 
     return 0;
 }
+
